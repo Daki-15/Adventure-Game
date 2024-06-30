@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyz
+*.pyzw
+pip-wheel-metadata/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Flask specific
+instance/
+*.log
+
+# Docker
+.dockerignore
+docker-compose.yml
+Dockerfile
+
+# MongoDB
+*.log
+*.mdb
+*.db
+*.sdb
+*.nsf
+*.jnl
+*.lock
+*.xlg
+*.blg
+
+# OS and IDE specific files
+.DS_Store
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Environment variables
+.env
