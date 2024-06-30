@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-Based Adventure Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/' + css_file) }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ player.name }}</h1>
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+        <p>What would you like to do?</p>
+        <form action="{{ url_for('play', player_name=player.name) }}" method="post">
+            <button name="action" value="1">Knock on the door of the house</button>
+            <button name="action" value="2">Peer into the cave</button>
+        </form>
+    </div>
+</body>
+</html>
