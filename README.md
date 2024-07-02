@@ -11,8 +11,6 @@ Welcome to the Text-Based Adventure Game! This project is a simple text-based ad
 - [Prerequisites](#prerequisites)
 - [Setup](#setup)
 - [Usage](#usage)
-- [Folder Structure](#folder-structure)
-- [License](#license)
 
 ## Introduction
 
