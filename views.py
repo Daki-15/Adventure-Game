@@ -1,12 +1,9 @@
-from flask import Flask, request, jsonify, render_template, redirect, url_for
-from pymongo import MongoClient
-import os
+from flask import Flask, request, render_template, redirect, url_for, jsonify
 
 app = Flask(__name__)
 
-# MongoDB connection
-client = MongoClient(os.getenv('MONGODB_URI', 'mongodb://localhost:27017/'))
-db = client.adventure_game
+# Dictionary to store player data
+players = {}
 
 @app.route('/')
 def home():
@@ -20,12 +17,12 @@ def start_game():
         'items': [],
         'location': 'field'
     }
-    db.players.insert_one(player)
+    players[player_name] = player
     return redirect(url_for('play', player_name=player_name))
 
 @app.route('/play/<player_name>', methods=['GET', 'POST'])
 def play(player_name):
-    player = db.players.find_one({'name': player_name})
+    player = players.get(player_name)
     if not player:
         return jsonify({"error": "Player not found"}), 404
 
@@ -50,7 +47,6 @@ def cave(player):
                    "You have found the magical Sword of Ogoroth! "
                    "You discard your silly old dagger and take the sword with you.")
         player['items'].append('sword')
-        db.players.update_one({'name': player['name']}, {'$set': player})
 
     player['location'] = 'field'
     return render_template('play.html', player=player, message=message, css_file='cave_styles.css')
@@ -70,8 +66,5 @@ def house(player):
                     "You do your best... but your dagger is no match for the fairie. "
                     "You have been defeated!")
 
-    #db.players.delete_one({'name': player['name']})
+    del players[player['name']]
     return render_template('end.html', message=message, css_file='house_styles.css')
-
-if __name__ == '__main__':
-    app.run(debug=True)
