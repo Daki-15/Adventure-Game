@@ -70,7 +70,3 @@ Before running the application, ensure you have the following installed:
 ![](./static/img/Image1.PNG)
 
 ![](./static/img/Image2.PNG)
-
-![](./static/img/Image1.PNG)
-
-![](./static/img/Image2.PNG)
