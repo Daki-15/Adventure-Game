@@ -1,9 +1,17 @@
 from flask import Flask, request, render_template, redirect, url_for, jsonify
+from pymongo import MongoClient
+import os
 
 app = Flask(__name__)
 
-# Dictionary to store player data
-players = {}
+# Connect to MongoDB
+try:
+    client = MongoClient("mongodb://mongo:27017/")
+    db = client['adventure_game']
+    players_collection = db['players']
+    print("Connected to MongoDB")
+except Exception as e:
+    print("Error connecting to MongoDB:", e)
 
 @app.route('/')
 def home():
@@ -17,13 +25,15 @@ def start_game():
         'items': [],
         'location': 'field'
     }
-    players[player_name] = player
+    print(f"Inserting player: {player}")  # Debugging log
+    players_collection.insert_one(player)
     return redirect(url_for('play', player_name=player_name))
 
 @app.route('/play/<player_name>', methods=['GET', 'POST'])
 def play(player_name):
-    player = players.get(player_name)
+    player = players_collection.find_one({'name': player_name})
     if not player:
+        print(f"Player not found: {player_name}")  # Debugging log
         return jsonify({"error": "Player not found"}), 404
 
     if request.method == 'POST':
@@ -49,6 +59,7 @@ def cave(player):
         player['items'].append('sword')
 
     player['location'] = 'field'
+    players_collection.update_one({'name': player['name']}, {"$set": player})
     return render_template('play.html', player=player, message=message, css_file='cave_styles.css')
 
 def house(player):
@@ -66,5 +77,4 @@ def house(player):
                     "You do your best... but your dagger is no match for the fairie. "
                     "You have been defeated!")
 
-    del players[player['name']]
     return render_template('end.html', message=message, css_file='house_styles.css')
