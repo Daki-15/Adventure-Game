@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # Connect to MongoDB
 try:
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb://mongo:27017/")
     db = client['adventure_game']
     players_collection = db['players']
     print("Connected to MongoDB")
@@ -107,7 +107,7 @@ def river(player):
     player.location = 'river'
     players_collection.update_one({'name': player.name}, {"$set": player.to_dict()})
     return render_template('play.html', player=player.to_dict(), current_location=player.location, message=message, css_file='index.css')
-
+  
 def mountain(player):
     if 'shield' in player.items:
         message = "You've been here before and taken the shield. The mountain peak is peaceful."
