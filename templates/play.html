@@ -4,19 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text-Based Adventure Game</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/' + css_file) }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
-<body>
-    <div class="container">
-        <h1>Welcome, {{ player.name }}</h1>
-        {% if message %}
-            <p>{{ message }}</p>
-        {% endif %}
-        <p>What would you like to do?</p>
-        <form action="{{ url_for('play', player_name=player.name) }}" method="post">
-            <button name="action" value="1">Knock on the door of the house</button>
-            <button name="action" value="2">Peer into the cave</button>
-        </form>
-    </div>
-</body>
+    <body data-location="{{ current_location }}">
+        <div class="container">
+            <h1>Welcome, {{ player['name'] }}</h1>
+            <p>You are currently at: {{ player['location'] }}</p>
+            {% if message %}
+                <p>{{ message }}</p>
+            {% endif %}
+            <form method="post">
+                <div class="button-container">
+                    {% if 'house' not in player['visited_locations'] %}
+                        <button class="location-button" name="action" value="1">Go to the House</button>
+                    {% endif %}
+                    {% if 'cave' not in player['visited_locations'] %}
+                        <button class="location-button" name="action" value="2">Explore the Cave</button>
+                    {% endif %}
+                    {% if 'forest' not in player['visited_locations'] %}
+                        <button class="location-button" name="action" value="3">Enter the Forest</button>
+                    {% endif %}
+                    {% if 'river' not in player['visited_locations'] %}
+                        <button class="location-button" name="action" value="4">Visit the River</button>
+                    {% endif %}
+                    {% if 'mountain' not in player['visited_locations'] %}
+                        <button class="location-button" name="action" value="5">Climb the Mountain</button>
+                    {% endif %}
+                    {% if 'village' not in player['visited_locations'] %}
+                        <button class="location-button" name="action" value="6">Go to the Village</button>
+                    {% endif %}
+                    {% if 'dungeon' not in player['visited_locations'] %}
+                        <button class="location-button" name="action" value="7">Enter the Dungeon</button>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+        <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    </body>
 </html>

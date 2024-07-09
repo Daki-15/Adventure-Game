@@ -1,5 +1,3 @@
-To update the documentation to reflect that the game no longer uses MongoDB and instead uses a dictionary for data storage, here is the revised version:
-
 # Text-Based Adventure Game
 
 Welcome to the Text-Based Adventure Game! This project is a simple text-based adventure game built using Python and Flask.
@@ -21,7 +19,7 @@ This project implements a text-based adventure game where players can navigate t
 - Player registration and game start functionality.
 - Interaction with different game scenarios (e.g., exploring a cave or entering a house).
 - Outcome based on player choices (e.g., acquiring items, winning or losing encounters).
-- Persistent player data storage using an in-memory dictionary.
+- Persistent player data storage using MongoDB.
 
 ## Prerequisites
 
@@ -30,6 +28,7 @@ Before running the application, ensure you have the following installed:
 - Python (3.9 or higher)
 - Flask (2.0.2)
 - Docker (optional, for containerization)
+- MongoDB (4.4 or higher)
 
 ## Setup
 
@@ -48,6 +47,8 @@ Before running the application, ensure you have the following installed:
 
 3. **Run the application:**
 
+   Ensure MongoDB is running on your local machine at the default port 27017. If using Docker, MongoDB will be set up automatically.
+
    ```bash
    python app.py
    ```
@@ -55,8 +56,7 @@ Before running the application, ensure you have the following installed:
    or using Docker:
 
    ```bash
-   docker build -t adventure-game .
-   docker run -p 5000:5000 adventure-game
+   docker-compose up
    ```
 
 ## Usage
