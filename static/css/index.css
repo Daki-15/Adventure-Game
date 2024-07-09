@@ -2,7 +2,6 @@ body {
     font-family: 'Courier New', Courier, monospace;
     margin: 0;
     padding: 0;
-    background-image: url('../img/home_bg.jpg'); /* Replace with your background image URL */
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -10,6 +9,39 @@ body {
     justify-content: center;
     align-items: center;
     color: #f4f4f4;
+    background-image: url('../img/home_bg.jpg');
+}
+
+body.field {
+    background-image: url('../img/field_bg.jpg');
+}
+
+body.house {
+    background-image: url('../img/house_bg.jpg');
+}
+
+body.cave {
+    background-image: url('../img/cave_bg.jpg');
+}
+
+body.forest {
+    background-image: url('../img/forest_bg.jpg');
+}
+
+body.river {
+    background-image: url('../img/river_bg.jpg');
+}
+
+body.mountain {
+    background-image: url('../img/mountain_bg.jpg');
+}
+
+body.village {
+    background-image: url('../img/village_bg.jpg');
+}
+
+body.dungeon {
+    background-image: url('../img/dungeon_bg.jpg');
 }
 
 .container {
@@ -31,18 +63,22 @@ p {
     margin-bottom: 10px;
 }
 
-form {
+input[type="text"] {
+    padding: 10px;
+    width: 80%;
+    max-width: 300px;
+    margin-bottom: 2px;
+    border: 2px solid #007BFF;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #000;
+}
+
+.button-container {
     margin-top: 20px;
 }
 
-input[type="text"] {
-    padding: 10px;
-    border: 2px solid #007BFF;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-button {
+.button-container button {
     padding: 10px 20px;
     background-color: #007BFF;
     color: #fff;
@@ -52,7 +88,7 @@ button {
     transition: background-color 0.3s ease;
 }
 
-button:hover {
+.button-container button:hover {
     background-color: #0056b3;
 }
 
