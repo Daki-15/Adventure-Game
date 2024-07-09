@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # Connect to MongoDB
 try:
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb://mongo:27017/")
     db = client['adventure_game']
     players_collection = db['players']
     print("Connected to MongoDB")
